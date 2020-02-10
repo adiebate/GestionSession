@@ -23,10 +23,6 @@ class Categorie
      */
     private $intitule;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $OneToMany;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="categorie")
@@ -55,17 +51,6 @@ class Categorie
         return $this;
     }
 
-    public function getOneToMany(): ?string
-    {
-        return $this->OneToMany;
-    }
-
-    public function setOneToMany(string $OneToMany): self
-    {
-        $this->OneToMany = $OneToMany;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Module[]
