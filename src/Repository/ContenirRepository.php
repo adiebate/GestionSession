@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Session;
 use App\Entity\Contenir;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Contenir|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,18 @@ class ContenirRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Contenir::class);
     }
+
+
+    /*public function getModulesFromSession($ids){
+
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT co
+            FROM App\Entity\Contenir co
+            WHERE $ids = co.session.id"
+        );
+
+    }*/
 
     // /**
     //  * @return Contenir[] Returns an array of Contenir objects

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Liste des sessions</h1>
+
+    <table>
+        <thead>
+            <th>Intitulé Session</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Nb places théoriques</th>
+            <th>Nb places réservées</th>
+            <th>Nb places restantes</th>
+            <th>Détail programme</th>
+        </thead>
+        <tbody>
+            {% for session in sessions %}
+            <tr>
+                <td>
+                    {{ session.intitule }}
+                </td>
+                <td>
+                    {{ session.dateDebut | date('d/m/Y') }}
+                </td>
+                <td>
+                    {{ session.dateFin | date('d/m/Y') }}
+                </td>
+                <td>
+                    {{ session.nbPlaces }}
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <a href="{{ path('show_one_session', {'id':session.id}) }}">Infos</a>
+                </td>
+
+            </tr>
+           
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
+</div>
+{% endblock %}

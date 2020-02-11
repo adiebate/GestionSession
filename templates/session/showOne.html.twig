@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('session_index') }}">Retour</a>
+
+<div class="example-wrapper">
+    <h1>Détail d'une session</h1>
+
+    
+
+        <h2>{{ session.intitule }}</h2>
+
+    {% if session %}
+        <table>
+            <thead>
+                <th>Module</th>
+                <th>Nb Jours</th>
+            </thead>
+            {% for contenir in session.duree %}
+        
+            <tbody>
+        
+                {# <tr>
+                    <td>
+                        {{ contenir.module.categorie.intitule }}
+                    </td>
+                </tr> #}
+                <tr>
+                    <td>
+                        {{ contenir.module.intitule}}
+                    </td>
+                    <td>
+                        {{ contenir.nbJours}}
+                    </td>
+                </tr>
+            </tbody>
+                
+        
+            
+                {# {{ dump(contenir.module.categorie.intitule)}}
+                {{ dump(contenir.module.intitule) }}
+                {{ dump(contenir.nbJours) }} #}
+        
+            {% endfor %}
+        </table>
+
+    {% endif %}
+
+
+
+</div>
+{% endblock %}
