@@ -3,13 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Stagiaire;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\StagiaireFormType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+/**
+ * @Route("/stagiaire")
+ */
+
 
 class StagiaireController extends AbstractController
 {
    /**
-     * @Route("/stagiaire", name="stagiare")
+     * @Route("/", name="stagiaire_index")
      */
     public function index()
     {
@@ -21,9 +28,38 @@ class StagiaireController extends AbstractController
             'stagiaires' => $stagiaires,
         ]);
     }
+    
+    /**
+    * @Route("/new", name="form_stagiaire")
+    */
+    public function newForm(Request $request){
+
+
+        $newStagiaire = new Stagiaire();
+        $form = $this->createForm(StagiaireFormType::class, $newStagiaire);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $newStagiaire = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newStagiaire);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('stagiaire_index');
+        }
+
+
+        return $this->render('stagiaire/formStagiaire.html.twig', [
+        'stagiaire_form' => $form->createView()
+        ]);
+     }
+
+
 
     /**
-    * @Route("stagiaire/{id}", name="showOne_stagiaire")
+    * @Route("/{id}", name="showOne_stagiaire")
     */
     public function showOne(Stagiaire $stagiaire){
         return $this->render('stagiaire/showOne.html.twig', ['stagiaire' => $stagiaire]
