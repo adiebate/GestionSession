@@ -30,9 +30,9 @@ class StagiaireFormType extends AbstractType
             ])
 
             ->add('sexe',ChoiceType::class, array('choices' => array(
-                'Homme' => '1',
-                'Femme' => '2',
-                'Autre' => '3',
+                'Homme' => 'Homme',
+                'Femme' => 'Femme',
+                'Autre' => 'Autre',
                ),
             ))
 

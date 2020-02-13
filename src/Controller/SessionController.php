@@ -51,7 +51,6 @@ class SessionController extends AbstractController
             return $this->redirectToRoute('session_index');
         }
 
-
         return $this->render('session/formSession.html.twig', [
         'session_form' => $form->createView()
         ]);
@@ -65,5 +64,5 @@ class SessionController extends AbstractController
          return $this->render('session/showOne.html.twig', ['session' => $session]);
      }
 
-     
+
 }

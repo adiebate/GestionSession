@@ -11,47 +11,64 @@
 
     
 
-        <h2>{{ session.intitule }}</h2>
+    <h2>{{ session.intitule }}</h2>
 
-    {% if session %}
-        <table>
-            <thead>
-                <th>Module</th>
-                <th>Nb Jours</th>
-            </thead>
-            {% for contenir in session.duree %}
-        
-            <tbody>
-        
-                {# <tr>
-                    <td>
-                        {{ contenir.module.categorie.intitule }}
-                    </td>
-                </tr> #}
-                <tr>
-                    <td>
-                        {{ contenir.module.intitule}}
-                    </td>
-                    <td>
-                        {{ contenir.nbJours}}
-                    </td>
-                </tr>
-            </tbody>
-                
-        
+    <h3>Modules de la session</h3>
+    <table>
+        <thead>
+            <th>Module</th>
+            <th>Nb Jours</th>
+            <th>Catégorie</th>
+        </thead>
+        {% for contenir in session.duree %}
+    
+        <tbody>
+    
+
+            <tr>
+                <td>
+                    {{ contenir.module.intitule}}
+                </td>
+                <td>
+                    {{ contenir.nbJours}}
+                </td>
+                <td>
+                    {{ contenir.module.categorie.intitule }}
+                </td>
+            </tr>
+        </tbody>
             
-                {# {{ dump(contenir.module.categorie.intitule)}}
-                {{ dump(contenir.module.intitule) }}
-                {{ dump(contenir.nbJours) }} #}
+    
         
-            {% endfor %}
-        </table>
+            {# {{ dump(contenir.module.categorie.intitule)}}
+            {{ dump(contenir.module.intitule) }}
+            {{ dump(contenir.nbJours) }} #}
+    
+        {% endfor %}
+    </table>
 
-        <table>
-            {{ dump(session) }}
-        </table>
+    <h3>Personnes inscrites à la session</h3>
+    <table>
+        <thead>
+            <th>Nom Prénom</th>
+            <th>E-mail</th>
+            <th>Telephone</th>
+        </thead>
+        <tbody>
+        {% for inscrit in session.stagiaires %}
+            
+            <tr>
+                
+                <td><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td> 
+                
+                <td>{{ inscrit.mail }}</td>
+                <td>{{ inscrit.telephone }}</td>
+            </tr>    
 
-    {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
 
 
 
