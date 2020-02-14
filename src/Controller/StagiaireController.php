@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -79,6 +80,22 @@ class StagiaireController extends AbstractController
             "stagiaire_form" => $form->createView()
         ]);
     }
+     
+
+    /**
+    * @Route("/{id}/removesession/{id_session}", name="remove_one_session_from_stagiaire")
+    */
+    public function removeOneSessionFromStagiaire(Stagiaire $stagiaire, Request $request){
+
+        $id = $request->attributes->get('id_session');
+        $entityManager = $this->getDoctrine()->getManager();
+        $session = $this->getDoctrine()->getRepository(Session::class)->find($id);
+        $stagiaire->removeInscription($session);
+        $entityManager->flush();
+
+
+    return $this->redirectToRoute("showOne_stagiaire", array('id' => $stagiaire->getId()));
+ }
 
     /**
     * @Route("/delete/{id}", name="remove_one_stagiaire")

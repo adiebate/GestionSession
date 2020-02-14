@@ -25,7 +25,8 @@
 
 <div>
 <ul>
-    <li>{{session.intitule}}  (du {{session.dateDebut | date("d/m/Y")}} au {{session.datefin | date("d/m/Y")}}) </li>
+    <li>{{session.intitule}}  (du {{session.dateDebut | date("d/m/Y")}} au {{session.datefin | date("d/m/Y")}}) 
+        <a href="{{ path('remove_one_session_from_stagiaire', {'id':stagiaire.id, 'id_session':session.id}) }}">X</a>  </li>
     
     
 </ul>
