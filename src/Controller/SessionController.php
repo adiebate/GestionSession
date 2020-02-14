@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Contenir;
 use App\Form\SessionFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,7 +57,30 @@ class SessionController extends AbstractController
         ]);
      }
 
+    /**
+    * @Route("/delete/{id}", name="remove_one_session")
+    */
+    public function removeOneSession(Session $session, EntityManagerInterface $entityManager){
 
+        $entityManager->remove($session);
+        $entityManager->flush();
+
+
+    return $this->redirectToRoute("session_index");
+ }
+
+
+    /**
+    * @Route("/delete/{id}", name="remove_one_stagiaire_from_session")
+    */
+     public function removeOneStagiaireFrom(Session $session, EntityManagerInterface $entityManager){
+
+            $entityManager->remove($session);
+            $entityManager->flush();
+
+
+        return $this->redirectToRoute("show_one_session");
+     }
 
 
     /**
@@ -67,10 +91,8 @@ class SessionController extends AbstractController
          return $this->render('session/showOne.html.twig', ['session' => $session]);
      }
 
-    //  public function removeOne(Session $session, Contenir $contenir){
 
-    //                     $entityManager = $this->getDoctrine()->getManager();
-    //  }
 
+    
 
 }

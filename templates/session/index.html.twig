@@ -15,7 +15,8 @@
             <th>Nb places théoriques</th>
             <th>Nb places réservées</th>
             <th>Nb places restantes</th>
-            <th>Détail programme</th>
+            
+            <th>Actions</th>
         </thead>
         <tbody>
             {% for session in sessions %}
@@ -43,7 +44,7 @@
                     {{ (session.nbPlaces) - (session.stagiaires|length)}}
                 </td>
                 <td>
-                    <a href="{{ path('show_one_session', {'id':session.id}) }}">Infos</a>
+                    <a href="{{ path('remove_one_session', {'id':session.id}) }}">Supprimer</a>
                 </td>
 
             </tr>
