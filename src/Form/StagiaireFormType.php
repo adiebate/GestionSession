@@ -17,7 +17,10 @@ class StagiaireFormType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('prenom')
+            ->add('prenom', TextType::class ,[
+                  'label'=> 'Prénom',
+            ]
+            )
             ->add('dateNaissance',DateType::class, [
                 'label' => 'Date de naissance',
                 'years' => range(date('Y'), date('Y')-102),

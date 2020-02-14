@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Stagiaire;
 use App\Form\StagiaireFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 /**
  * @Route("/stagiaire")
@@ -55,8 +57,40 @@ class StagiaireController extends AbstractController
         'stagiaire_form' => $form->createView()
         ]);
      }
+     
+    /**
+     * @Route("/edit/{id}", name="edit_stagiaire")
+     */
+    public function editStagiaire(Stagiaire $stagiaire, Request $request, EntityManagerInterface $entityManager){
+
+        $form = $this->createForm(StagiaireFormType::class, $stagiaire);
 
 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute("stagiaire_index");
+        }
+
+        return $this->render('stagiaire/formStagiaire.html.twig', [
+            "stagiaire_form" => $form->createView()
+        ]);
+    }
+
+    /**
+    * @Route("/delete/{id}", name="remove_one_stagiaire")
+    */
+    public function removeOnestagiaire(Stagiaire $stagiaire, EntityManagerInterface $entityManager){
+
+        $entityManager->remove($stagiaire);
+        $entityManager->flush();
+
+
+    return $this->redirectToRoute("stagiaire_index");
+ }
 
     /**
     * @Route("/{id}", name="showOne_stagiaire")

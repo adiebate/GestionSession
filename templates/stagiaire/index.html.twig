@@ -6,7 +6,7 @@
 
 
 <div class="example-wrapper">
-   <h1>Liste des stagiaires</h1>
+   <h1 class="centrer">Liste des stagiaires</h1>
     <table>
         <thead>
             <th>Nom</th>
@@ -14,6 +14,7 @@
             <th>DateNaissance</th>
             <th>Nombre de sessions inscrits</th>
             <th>infos stagiaires</th>
+            <th>Actions</th>
          
         </thead>
 
@@ -27,19 +28,25 @@
                     {{ stagiaire.prenom}}
                 </td>
                 <td>
-                    {{ stagiaire.DateNaissance| date('d/m/Y') }}
+                    {{ stagiaire.DateNaissance|date('d/m/Y') }}
                 </td>
                 <td>
-                    
+                    {{ stagiaire.inscription|length}}
                 </td>
                  <td>
                     <a href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">Infos</a>
+                </td>
+                <td>
+                    <a href="{{ path('remove_one_stagiaire', {'id':stagiaire.id}) }}">Supprimer</a>
+                    <a href="{{ path('edit_stagiaire', {'id':stagiaire.id}) }}">Editer</a>
                 </td>
 
                     
         {% endfor %}
     </table>
-    
-    <a href="{{ path('form_stagiaire') }}">Ajouter un stagiaire</a>
+    <div class="centrer">
+    <a  href="{{ path('form_stagiaire') }}" >Ajouter un stagiaire</a>
+ 
+    </div>
 </div>
 {% endblock %}

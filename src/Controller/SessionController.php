@@ -116,7 +116,4 @@ class SessionController extends AbstractController
      }
 
 
-
-    
-
 }
