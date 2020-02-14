@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Contenir;
+use App\Entity\Stagiaire;
 use App\Form\SessionFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,29 @@ class SessionController extends AbstractController
         ]);
      }
 
+
+    /**
+     * @Route("/edit/{id}", name="edit_session")
+     */
+    public function editSession(Session $session, Request $request, EntityManagerInterface $entityManager){
+
+        $form = $this->createForm(SessionFormType::class, $session);
+
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute("session_index");
+        }
+
+        return $this->render('session/formSession.html.twig', [
+            "session_form" => $form->createView()
+        ]);
+    }
+
     /**
     * @Route("/delete/{id}", name="remove_one_session")
     */
@@ -71,11 +95,11 @@ class SessionController extends AbstractController
 
 
     /**
-    * @Route("/delete/{id}", name="remove_one_stagiaire_from_session")
+    * @Route("/", name="remove_one_stagiaire_from_session")
     */
-     public function removeOneStagiaireFrom(Session $session, EntityManagerInterface $entityManager){
+     public function removeOneStagiaireFromSession(Stagiaire $stagiaire, EntityManagerInterface $entityManager){
 
-            $entityManager->remove($session);
+            $entityManager->removeStagiaire($stagiaire);
             $entityManager->flush();
 
 
