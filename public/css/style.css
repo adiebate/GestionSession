@@ -1,7 +1,7 @@
 body {
     background-color: #4c8c98 ;
     color: white;
-    text-align: center;
+    font-size: 16px;
 }
 a {
     color: inherit;
@@ -13,7 +13,7 @@ table{
 }
 table, th, td {
     border: 1px solid white;
-    padding: 1em;
+    padding: 0.5em 1em;
   }
   thead {
       background-color: #0099cc;
@@ -25,7 +25,19 @@ table, th, td {
   tr:nth-child(even) {
       background-color: #f2f2f2;
     }
-  tr:hover{
+  tbody tr:hover{
       background-color: #33add6;
       color: white;
+  }
+
+  div.bold a{
+      margin:auto;
+  }
+
+  
+  .bold {
+      font-weight: bold;
+  }
+  .centrer{
+      text-align: center;
   }

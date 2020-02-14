@@ -26,9 +26,10 @@
     
 
             <tr>
-                <td>
-
+                <td class="bold">
+                     
                     {{ contenir.module.intitule}}
+              
                 </td>
                 <td>
                     {{ contenir.nbJours}}
@@ -54,23 +55,25 @@
             <th>Nom Prénom</th>
             <th>E-mail</th>
             <th>Telephone</th>
+            <th>Action</th>
         </thead>
         <tbody>
         {% for inscrit in session.stagiaires %}
             
             <tr>
                 
-                <td><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td> 
+                <td class="bold"><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td> 
                 
                 <td>{{ inscrit.mail }}</td>
                 <td>{{ inscrit.telephone }}</td>
+                
             </tr>    
 
         {% endfor %}
         </tbody>
     </table>
 
-
+    <h3>Ajouter un stagiaire à la session</h3>
 
 
 </div>

@@ -41,7 +41,7 @@ class SessionController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $newSession = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -56,6 +56,9 @@ class SessionController extends AbstractController
         ]);
      }
 
+
+
+
     /**
      * @Route("/{id}", name="show_one_session", methods="GET")
      */
@@ -63,6 +66,11 @@ class SessionController extends AbstractController
 
          return $this->render('session/showOne.html.twig', ['session' => $session]);
      }
+
+    //  public function removeOne(Session $session, Contenir $contenir){
+
+    //                     $entityManager = $this->getDoctrine()->getManager();
+    //  }
 
 
 }

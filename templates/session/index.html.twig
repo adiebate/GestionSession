@@ -20,8 +20,12 @@
         <tbody>
             {% for session in sessions %}
             <tr>
-                <td>
-                    {{ session.intitule }}
+                <td class="bold">
+                    <h3>
+                    <a href="{{ path('show_one_session', {'id':session.id}) }}">
+                       {{ session.intitule }}
+                    </a>
+                </h3>    
                 </td>
                 <td>
                     {{ session.dateDebut | date('d/m/Y') }}
@@ -33,10 +37,10 @@
                     {{ session.nbPlaces }}
                 </td>
                 <td>
-                    
+                    {{ session.stagiaires|length}}
                 </td>
                 <td>
-
+                    {{ (session.nbPlaces) - (session.stagiaires|length)}}
                 </td>
                 <td>
                     <a href="{{ path('show_one_session', {'id':session.id}) }}">Infos</a>
