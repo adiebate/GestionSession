@@ -5,22 +5,38 @@
 {% block body %}
 
 
-<div class="example-wrapper">
+<div>
 
 <a href="{{ path('stagiaire_index') }}">Retour</a>
 
     <h1>Détails d'un stagiaire</h1>
-        {{stagiaire.nom ~ ' ' ~ stagiaire.prenom}}<br>
- <thead>
-        <th>Né le: {{stagiaire.dateNaissance | date("d/m/Y")}}</th><br>
-        <th>Mail : {{stagiaire.mail}}</th><br>
-        <th>Ville : {{stagiaire.ville}}</th><br>
-        <th>Téléphone : {{stagiaire.telephone}}</th><br>
-        <th>Sexe : {{stagiaire.sexe}}</th><br>
-</thead>
+        
+    {{stagiaire.nom ~ ' ' ~ stagiaire.prenom}}<br>
+ 
+        <p>Né le: {{stagiaire.dateNaissance | date("d/m/Y")}}<br>
+           Mail : {{stagiaire.mail}}<br>
+           Ville : {{stagiaire.ville}}<br>
+           Téléphone : {{stagiaire.telephone}}<br>
+           Sexe : {{stagiaire.sexe}}</p><br>
+
 <h3> Sessions prévus: </h3>
 
 {% for session in stagiaire.inscription %}
+
+<div>
+<ul>
+    <li>{{session.intitule}}  (du {{session.dateDebut | date("d/m/Y")}} au {{session.datefin | date("d/m/Y")}}) </li>
+    
+    
+</ul>
+
+</div>
+
+
+
+
+    
+
     
 {% endfor %}
 </div>
