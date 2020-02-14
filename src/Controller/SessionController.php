@@ -95,24 +95,29 @@ class SessionController extends AbstractController
 
 
     /**
-    * @Route("/", name="remove_one_stagiaire_from_session")
+    * @Route("/{id}/removestagiaire/{id_stagiaire}", name="remove_one_stagiaire_from_session")
     */
-     public function removeOneStagiaireFromSession(Stagiaire $stagiaire, EntityManagerInterface $entityManager){
+     public function removeOneStagiaireFromSession(Session $session, Request $request){
 
-            $entityManager->removeStagiaire($stagiaire);
+            $id = $request->attributes->get('id_stagiaire');
+            $entityManager = $this->getDoctrine()->getManager();
+            $stagiaire = $this->getDoctrine()->getRepository(Stagiaire::class)->find($id);
+            $session->removeStagiaire($stagiaire);
             $entityManager->flush();
 
 
-        return $this->redirectToRoute("show_one_session");
+        return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
      }
 
 
     /**
      * @Route("/{id}", name="show_one_session", methods="GET")
      */
-     public function showOne(Session $session, Contenir $contenir){
+     public function showOne(Session $session, Stagiaire $stagiaire, Contenir $contenir){
 
-         return $this->render('session/showOne.html.twig', ['session' => $session]);
+         return $this->render('session/showOne.html.twig', [
+             'session' => $session ]);
+
      }
 
 

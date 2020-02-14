@@ -44,8 +44,8 @@
                     {{ (session.nbPlaces) - (session.stagiaires|length)}}
                 </td>
                 <td>
-                    <a href="{{ path('remove_one_session', {'id':session.id}) }}">Supprimer</a>
-                    <a href="{{ path('edit_session', {'id':session.id}) }}">Edit</a>
+                    <a class="action" href="{{ path('edit_session', {'id':session.id}) }}">&expectation;</a>
+                    <a class="action" href="{{ path('remove_one_session', {'id':session.id}) }}">&xotime;</a>
                 </td>
 
             </tr>

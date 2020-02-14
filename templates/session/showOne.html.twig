@@ -66,7 +66,7 @@
                 
                 <td>{{ inscrit.mail }}</td>
                 <td>{{ inscrit.telephone }}</td>
-                <td><a href="{{ path('remove_one_stagiaire_from_session')}}">X</a> </td>
+                <td><a href="{{ path('remove_one_stagiaire_from_session', {'id':session.id, 'id_stagiaire':inscrit.id}) }}">X</a> </td>
                 
             </tr>    
 
@@ -75,6 +75,8 @@
     </table>
 
     <h3>Ajouter un stagiaire à la session</h3>
+
+
 
 
 </div>

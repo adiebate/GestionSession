@@ -41,3 +41,8 @@ table, th, td {
   .centrer{
       text-align: center;
   }
+  .action{
+      font-size: 2em;
+      text-decoration: inherit;
+      padding: 0 0.5em;
+  }
