@@ -42,16 +42,16 @@ class Session
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenir", mappedBy="session")
      */
-    private $duree;
+    private $contenir;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="inscription")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="session")
      */
     private $stagiaires;
 
     public function __construct()
     {
-        $this->duree = new ArrayCollection();
+        $this->contenir = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
     }
 
@@ -111,28 +111,28 @@ class Session
     /**
      * @return Collection|Contenir[]
      */
-    public function getDuree(): Collection
+    public function getContenir(): Collection
     {
-        return $this->duree;
+        return $this->contenir;
     }
 
-    public function addDuree(Contenir $duree): self
+    public function addContenir(Contenir $contenir): self
     {
-        if (!$this->duree->contains($duree)) {
-            $this->duree[] = $duree;
-            $duree->setSession($this);
+        if (!$this->contenir->contains($contenir)) {
+            $this->contenir[] = $contenir;
+            $contenir->setSession($this);
         }
 
         return $this;
     }
 
-    public function removeDuree(Contenir $duree): self
+    public function removeContenir(Contenir $contenir): self
     {
-        if ($this->duree->contains($duree)) {
-            $this->duree->removeElement($duree);
+        if ($this->contenir->contains($contenir)) {
+            $this->contenir->removeElement($contenir);
             // set the owning side to null (unless already changed)
-            if ($duree->getSession() === $this) {
-                $duree->setSession(null);
+            if ($contenir->getSession() === $this) {
+                $contenir->setSession(null);
             }
         }
 
@@ -151,7 +151,7 @@ class Session
     {
         if (!$this->stagiaires->contains($stagiaire)) {
             $this->stagiaires[] = $stagiaire;
-            $stagiaire->addInscription($this);
+            $stagiaire->addSession($this);
         }
 
         return $this;
@@ -161,7 +161,7 @@ class Session
     {
         if ($this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->removeElement($stagiaire);
-            $stagiaire->removeInscription($this);
+            $stagiaire->removeSession($this);
         }
 
         return $this;

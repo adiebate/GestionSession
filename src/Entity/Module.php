@@ -26,17 +26,17 @@ class Module
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenir", mappedBy="module")
      */
-    private $duree;
+    private $contenir;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="appartenir")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="module")
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
     public function __construct()
     {
-        $this->duree = new ArrayCollection();
+        $this->contenir = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,28 +59,28 @@ class Module
     /**
      * @return Collection|Contenir[]
      */
-    public function getDuree(): Collection
+    public function getContenir(): Collection
     {
-        return $this->duree;
+        return $this->contenir;
     }
 
-    public function addDuree(Contenir $duree): self
+    public function addContenir(Contenir $contenir): self
     {
-        if (!$this->duree->contains($duree)) {
-            $this->duree[] = $duree;
-            $duree->setModule($this);
+        if (!$this->contenir->contains($contenir)) {
+            $this->contenir[] = $contenir;
+            $contenir->setModule($this);
         }
 
         return $this;
     }
 
-    public function removeDuree(Contenir $duree): self
+    public function removeContenir(Contenir $contenir): self
     {
-        if ($this->duree->contains($duree)) {
-            $this->duree->removeElement($duree);
+        if ($this->contenir->contains($contenir)) {
+            $this->contenir->removeElement($contenir);
             // set the owning side to null (unless already changed)
-            if ($duree->getModule() === $this) {
-                $duree->setModule(null);
+            if ($contenir->getModule() === $this) {
+                $contenir->setModule(null);
             }
         }
 

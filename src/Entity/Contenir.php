@@ -22,12 +22,12 @@ class Contenir
     private $NbJours;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="duree")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="contenir")
      */
     private $module;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Session", inversedBy="duree")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Session", inversedBy="contenir")
      * @ORM\JoinColumn(nullable=false)
      */
     private $session;

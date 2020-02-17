@@ -7,11 +7,13 @@
 <a  href="{{ path('session_index') }}">Retour</a>
 
 <div class="example-wrapper">
-    <h1 >Créer une session</h1>
+    <h1 >Ajouter un module à la session {{ session.intitule }}</h1>
 
     
 
-{{ form(session_form) }}
+    <div>
+        {{ form(ajoutmoduleform) }} 
+    </div>
 
 
 </div>

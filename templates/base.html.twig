@@ -10,7 +10,9 @@
     <nav><a href="{{ path('home_index') }}">Accueil</a></nav>
 
     <body>
-        {% block body %}{% endblock %}
+        <section>
+            {% block body %}{% endblock %}
+        </section>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

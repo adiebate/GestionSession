@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 
+use App\Entity\Module;
 use App\Entity\Session;
 use App\Entity\Contenir;
 use App\Entity\Stagiaire;
 use App\Form\SessionFormType;
+use App\Form\AjoutModuleFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,8 +55,38 @@ class SessionController extends AbstractController
             return $this->redirectToRoute('session_index');
         }
 
-        return $this->render('session/formSession.html.twig', [
+        return $this->render('session/sessionForm.html.twig', [
         'session_form' => $form->createView()
+        ]);
+     }
+
+
+    /**
+    * @Route("/newModule/{id}", name="ajout_module")
+    */
+    public function AjoutModuleForm(Session $session, Request $request){
+
+
+        $newAjoutModule= new Contenir();
+        $newAjoutModule->setSession($session);
+
+        $form = $this->createForm(AjoutModuleFormType::class, $newAjoutModule);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $newAjoutModule = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newAjoutModule);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('session_index');
+        }
+
+        return $this->render('session/ajoutModuleForm.html.twig', [
+            'ajoutmoduleform' => $form->createView(),
+            'session' => $session
         ]);
      }
 
@@ -76,7 +108,7 @@ class SessionController extends AbstractController
             return $this->redirectToRoute("session_index");
         }
 
-        return $this->render('session/formSession.html.twig', [
+        return $this->render('session/sessionForm.html.twig', [
             "session_form" => $form->createView()
         ]);
     }

@@ -31,7 +31,7 @@
                     {{ stagiaire.DateNaissance|date('d/m/Y') }}
                 </td>
                 <td>
-                    {{ stagiaire.inscription|length}}
+                    {{ stagiaire.session|length}}
                 </td>
                  <td>
                     <a href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">Infos</a>

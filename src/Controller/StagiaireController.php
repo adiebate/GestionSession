@@ -54,7 +54,7 @@ class StagiaireController extends AbstractController
         }
 
 
-        return $this->render('stagiaire/formStagiaire.html.twig', [
+        return $this->render('stagiaire/stagiaireForm.html.twig', [
         'stagiaire_form' => $form->createView()
         ]);
      }
@@ -76,7 +76,7 @@ class StagiaireController extends AbstractController
             return $this->redirectToRoute("stagiaire_index");
         }
 
-        return $this->render('stagiaire/formStagiaire.html.twig', [
+        return $this->render('stagiaire/stagiaireForm.html.twig', [
             "stagiaire_form" => $form->createView()
         ]);
     }

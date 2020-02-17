@@ -4,9 +4,10 @@
 
 {% block body %}
 
+<br>
 <a href="{{ path('session_index') }}">Retour</a>
 
-<div class="example-wrapper">
+<div class="example-wrapper centrer">
     <h1>Détail d'une session</h1>
 
     
@@ -20,35 +21,29 @@
             <th>Nb Jours</th>
             <th>Catégorie</th>
         </thead>
-        {% for contenir in session.duree %}
+        {% for prog in session.contenir %}
     
         <tbody>
-    
-
             <tr>
                 <td class="bold">
-                     
-                    {{ contenir.module.intitule}}
-              
+                    {{ prog.module.intitule}}              
                 </td>
                 <td>
-                    {{ contenir.nbJours}}
+                    {{ prog.nbJours}}
                 </td>
                 <td>
-                    {{ contenir.module.categorie.intitule }}
+                    {{ prog.module.categorie.intitule }}
                 </td>
             </tr>
         </tbody>
-            
-    
-        
-            {# {{ dump(contenir.module.categorie.intitule)}}
-            {{ dump(contenir.module.intitule) }}
-            {{ dump(contenir.nbJours) }} #}
+
     
         {% endfor %}
-    </table>
 
+       
+    </table>
+    <br>
+    <a href="{{ path('ajout_module', {'id':session.id}) }}">Ajouter un module</a>
     <h3>Personnes inscrites à la session</h3>
     <table>
         <thead>
@@ -61,9 +56,7 @@
         {% for inscrit in session.stagiaires %}
             
             <tr>
-                
-                <td class="bold"><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td> 
-                
+                <td class="bold"><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td>                 
                 <td>{{ inscrit.mail }}</td>
                 <td>{{ inscrit.telephone }}</td>
                 <td><a href="{{ path('remove_one_stagiaire_from_session', {'id':session.id, 'id_stagiaire':inscrit.id}) }}">X</a> </td>

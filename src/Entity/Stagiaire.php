@@ -56,11 +56,11 @@ class Stagiaire
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Session", inversedBy="stagiaires")
      */
-    private $inscription;
+    private $session;
 
     public function __construct()
     {
-        $this->inscription = new ArrayCollection();
+        $this->session = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,24 +155,24 @@ class Stagiaire
     /**
      * @return Collection|Session[]
      */
-    public function getInscription(): Collection
+    public function getSession(): Collection
     {
-        return $this->inscription;
+        return $this->session;
     }
 
-    public function addInscription(Session $inscription): self
+    public function addSession(Session $session): self
     {
-        if (!$this->inscription->contains($inscription)) {
-            $this->inscription[] = $inscription;
+        if (!$this->session->contains($session)) {
+            $this->session[] = $session;
         }
 
         return $this;
     }
 
-    public function removeInscription(Session $inscription): self
+    public function removeSession(Session $session): self
     {
-        if ($this->inscription->contains($inscription)) {
-            $this->inscription->removeElement($inscription);
+        if ($this->session->contains($session)) {
+            $this->session->removeElement($session);
         }
 
         return $this;

@@ -9,10 +9,10 @@ a {
 
 table{
     margin:auto;
-    border: 1px solid white;
+    border: 1px solid black;
 }
 table, th, td {
-    border: 1px solid white;
+    border: 1px solid black;
     padding: 0.5em 1em;
   }
   thead {
@@ -27,7 +27,7 @@ table, th, td {
     }
   tbody tr:hover{
       background-color: #33add6;
-      color: white;
+      
   }
 
   div.bold a{
@@ -48,4 +48,12 @@ table, th, td {
   }
   .margin{
       margin:auto;
+  }
+
+  section{
+      max-width: 1000px;
+      margin: auto;
+      background-color: white;
+      color: black;
+      padding: 1em;
   }
