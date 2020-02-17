@@ -4,11 +4,13 @@
 
 {% block body %}
 
-<h1>BIENVENUE HUMAIN !</h1>
+<h1 class="centrer">BIENVENUE HUMAIN !</h1>
 
+<figure class="centrer">
 <img src="{{ asset('img/elan.png') }}" alt="Logo Elan">
+</figure>
 
-<div class="bold">
+<div class="bold centrer">
     <a href="{{ path('session_index') }}">Gestion des Sessions</a>
     <a href="{{ path('stagiaire_index') }}">Gestion des Stagiaires</a>
 </div>
