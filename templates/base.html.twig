@@ -4,10 +4,14 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    </head>
 
+    </head>
+<header>
     <nav><a href="{{ path('home_index') }}">Accueil</a></nav>
+</header>
+    
 
     <body>
         <section>
