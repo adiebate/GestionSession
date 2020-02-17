@@ -21,7 +21,7 @@
 
 <h3> Sessions prévus: </h3>
 
-{% for session in stagiaire.session %}
+{% for session in stagiaire.sessions %}
 
 <div>
 <ul>
@@ -31,6 +31,8 @@
 </div>
 {% endfor %}
 <h3>Ajouter une session au stagiaire</h3>
+
+<a href="{{ path('ajout_session', {'id':stagiaire.id}) }}">ajouter une session</a>
 
 
     

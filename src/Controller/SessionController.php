@@ -9,6 +9,7 @@ use App\Entity\Contenir;
 use App\Entity\Stagiaire;
 use App\Form\SessionFormType;
 use App\Form\AjoutModuleFormType;
+use App\Form\AjoutStagiaireFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,6 +92,34 @@ class SessionController extends AbstractController
      }
 
 
+     /**
+    * @Route("/newStagiaire/{id}", name="ajout_stagiaire")
+    */
+    public function AjoutStagiaireForm(Session $session, Request $request, EntityManagerInterface $em){
+
+        $form = $this->createForm(AjoutStagiaireFormType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $newAjoutStagiaire = $form->get('stagiaire')->getData();
+
+            $session->addStagiaire($newAjoutStagiaire);
+
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($stagiaire);
+            $em->flush();
+
+            return $this->redirectToRoute('session_index');
+        }
+
+        return $this->render('session/ajoutStagiaireForm.html.twig', [
+            'ajoutstagiaireform' => $form->createView(),
+            'session' => $session
+        ]);
+     }
+
+
     /**
      * @Route("/edit/{id}", name="edit_session")
      */
@@ -145,12 +174,11 @@ class SessionController extends AbstractController
     /**
      * @Route("/{id}", name="show_one_session", methods="GET")
      */
-     public function showOne(Session $session, Stagiaire $stagiaire, Contenir $contenir){
+     public function showOne(Session $session){
 
          return $this->render('session/showOne.html.twig', [
              'session' => $session ]);
 
      }
-
 
 }

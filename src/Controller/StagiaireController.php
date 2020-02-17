@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireFormType;
+use App\Form\AjoutSessionFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -58,6 +59,36 @@ class StagiaireController extends AbstractController
         'stagiaire_form' => $form->createView()
         ]);
      }
+
+     
+    /**
+    * @Route("/newSession/{id}", name="ajout_session")
+    */
+    public function AjoutSessionForm(Stagiaire $stagiaire, Request $request, EntityManagerInterface $em){
+
+        $form = $this->createForm(AjoutSessionFormType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $newAjoutSession = $form->get('session')->getData();
+
+            $stagiaire->addSession($newAjoutSession);
+
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($stagiaire);
+            $em->flush();
+
+            return $this->redirectToRoute('stagiaire_index');
+        }
+
+        return $this->render('stagiaire/ajoutSessionForm.html.twig', [
+            'ajoutsessionform' => $form->createView(),
+            'stagiaire' => $stagiaire
+        ]);
+     }
+
+
      
     /**
      * @Route("/edit/{id}", name="edit_stagiaire")
@@ -90,7 +121,7 @@ class StagiaireController extends AbstractController
         $id = $request->attributes->get('id_session');
         $entityManager = $this->getDoctrine()->getManager();
         $session = $this->getDoctrine()->getRepository(Session::class)->find($id);
-        $stagiaire->removeInscription($session);
+        $stagiaire->removeSession($session);
         $entityManager->flush();
 
 

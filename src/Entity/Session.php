@@ -45,7 +45,7 @@ class Session
     private $contenir;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="session")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="sessions")
      */
     private $stagiaires;
 

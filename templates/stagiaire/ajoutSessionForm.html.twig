@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions{% endblock %}
+
+{% block body %}
+
+<a  href="{{ path('session_index') }}">Retour</a>
+
+<div class="example-wrapper">
+    <h1 >Ajouter une session au stagiaire {{ stagiaire.nom ~ ' ' ~ stagiaire.prenom  }}</h1>
+
+    
+
+    <div>
+        {{ form(ajoutsessionform) }} 
+    </div>
+
+
+</div>
+{% endblock %}
