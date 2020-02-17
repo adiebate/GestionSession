@@ -9,8 +9,7 @@
    <h1 class="centrer">Liste des stagiaires</h1>
     <table>
         <thead>
-            <th>Nom</th>
-            <th>Prénom</th>
+            <th>Nom Prénom</th>
             <th>DateNaissance</th>
             <th>Nombre de sessions inscrits</th>
             <th>infos stagiaires</th>
@@ -22,11 +21,9 @@
 
         <tr>
                 <td>
-                    {{ stagiaire.nom }}
+                    {{stagiaire.nom ~ ' ' ~ stagiaire.prenom}}
                 </td>
-                <td>
-                    {{ stagiaire.prenom}}
-                </td>
+             
                 <td>
                     {{ stagiaire.DateNaissance|date('d/m/Y') }}
                 </td>
@@ -37,8 +34,8 @@
                     <a href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">Infos</a>
                 </td>
                 <td>
-                    <a href="{{ path('remove_one_stagiaire', {'id':stagiaire.id}) }}">Supprimer</a>
-                    <a href="{{ path('edit_stagiaire', {'id':stagiaire.id}) }}">Editer</a>
+                    <a class="action" href="{{ path('remove_one_stagiaire', {'id':stagiaire.id}) }}">&expectation;</a>
+                    <a class="action" href="{{ path('edit_stagiaire', {'id':stagiaire.id}) }}">&xotime;</a>
                 </td>
 
                     
