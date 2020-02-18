@@ -28,6 +28,7 @@ table, th, td {
   }
   thead {
       background-color: #0099cc;
+      color: white;
   }
   tbody{
       background-color: white;
@@ -84,7 +85,7 @@ table, th, td {
   }
 
   .boiteform{
-      max-width: 200px;
+      max-width: 190px;
       margin: auto;
   }
 
@@ -103,4 +104,20 @@ table, th, td {
   form>div>div:last-of-type{
       margin-top: 1em;
       text-align: center;
+  }
+
+  .boiteStag{
+
+        max-width: 300px;
+        margin: auto;
+
+  }
+
+  .retour{
+    color: #0099cc;
+    font-weight: bold;
+  }
+
+  .accueil{
+      
   }

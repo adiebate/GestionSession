@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<a  href="{{ path('session_index') }}">Retour</a>
+<a class="retour" href="{{ path('show_one_session', {'id':session.id}) }}">Retour</a>
 
 <div class="example-wrapper">
     <h1 class="centrer" >Ajouter un stagiaire à la session {{ session.intitule }}</h1>

@@ -4,6 +4,8 @@
 
 {% block body %}
 
+<a class="retour" href="{{ path('home_index') }}">Retour</a>
+
 <div class="example-wrapper centrer">
     <h1>Liste des sessions</h1>
 
@@ -55,6 +57,6 @@
         
     </table>
     <br>
-    <a href="{{ path('form_session') }}">Ajouter une session</a>
+    <a class="submit" href="{{ path('form_session') }}">Ajouter une session</a>
 </div>
 {% endblock %}

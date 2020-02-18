@@ -82,7 +82,7 @@ class SessionController extends AbstractController
             $entityManager->persist($newAjoutModule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('session_index');
+            return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
         }
 
         return $this->render('session/ajoutModuleForm.html.twig', [
@@ -110,7 +110,7 @@ class SessionController extends AbstractController
             // $entityManager->persist($stagiaire);
             $em->flush();
 
-            return $this->redirectToRoute('session_index');
+            return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
         }
 
         return $this->render('session/ajoutStagiaireForm.html.twig', [
@@ -161,8 +161,11 @@ class SessionController extends AbstractController
 
         $id = $request->attributes->get('id_contenir');
         $entityManager = $this->getDoctrine()->getManager();
-        $contenir = $this->getDoctrine()->getRepository(Contenir::class)->find($id);
-        $session->removeContenir($contenir);
+        $contenir = $this->getDoctrine()->getRepository(Contenir::class)->findOneBy([
+            'session'=> $session->getId(),
+            'module'=> $id
+        ]);
+        $entityManager->remove($contenir);
         $entityManager->flush();
 
 

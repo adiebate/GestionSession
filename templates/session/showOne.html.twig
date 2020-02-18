@@ -4,8 +4,7 @@
 
 {% block body %}
 
-<br>
-<a href="{{ path('session_index') }}">Retour</a>
+<a class="retour" href="{{ path('session_index') }}">Retour</a>
 
 <div class="example-wrapper centrer">
     <h1>Détail d'une session</h1>
@@ -35,7 +34,7 @@
                 <td>
                     {{ prog.module.categorie.intitule }}
                 </td>
-                <td><a href="{{ path('remove_one_module_from_session', {'id':session.id, 'id_contenir':prog.id}) }}">Delete</a></td>
+                <td><a href="{{ path('remove_one_module_from_session', {'id':session.id, 'id_contenir':prog.module.id}) }}">&xotime;</a></td>
             </tr>
         </tbody>
 
@@ -46,7 +45,7 @@
        
     </table>
     <br>
-    <a href="{{ path('ajout_module', {'id':session.id}) }}">Ajouter un module</a>
+    <a class="submit" href="{{ path('ajout_module', {'id':session.id}) }}">Ajouter un module</a>
     <h3>Personnes inscrites à la session</h3>
     <table>
         <thead>
@@ -62,15 +61,15 @@
                 <td class="bold"><a href="{{ path('showOne_stagiaire', {'id':inscrit.id}) }}">{{ inscrit.nom }} {{ inscrit.prenom }}</a></td>                 
                 <td>{{ inscrit.mail }}</td>
                 <td>{{ inscrit.telephone }}</td>
-                <td><a href="{{ path('remove_one_stagiaire_from_session', {'id':session.id, 'id_stagiaire':inscrit.id}) }}">X</a> </td>
+                <td><a href="{{ path('remove_one_stagiaire_from_session', {'id':session.id, 'id_stagiaire':inscrit.id}) }}">&xotime;</a> </td>
                 
             </tr>    
 
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('ajout_stagiaire', {'id':session.id}) }}">Ajouter un stagiaire à la session</a>
+    <br>
+    <a class="submit" href="{{ path('ajout_stagiaire', {'id':session.id}) }}">Ajouter un stagiaire à la session</a>
 
 
 

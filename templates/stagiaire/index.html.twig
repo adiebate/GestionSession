@@ -4,13 +4,14 @@
 
 {% block body %}
 
+<a class="retour" href="{{ path('home_index') }}">Retour</a>
 
 <div class="example-wrapper">
    <h1 class="centrer">Liste des stagiaires</h1>
     <table>
         <thead>
             <th>Nom Prénom</th>
-            <th>DateNaissance</th>
+            <th>Date de naissance</th>
             <th>Nombre de sessions inscrits</th>
             <th>Actions</th>
          
@@ -18,7 +19,7 @@
 
         {% for stagiaire in stagiaires %}
 
-        <tr>
+        <tr class="centrer">
                 <td>
                     <a class="bold" href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">{{ stagiaire.nom }} {{ stagiaire.prenom }}</a>
                 </td>
@@ -38,8 +39,9 @@
                     
         {% endfor %}
     </table>
+    <br>
     <div class="centrer">
-    <a  href="{{ path('form_stagiaire') }}" >Ajouter un stagiaire</a>
+    <a class="submit" href="{{ path('form_stagiaire') }}" >Ajouter un stagiaire</a>
  
     </div>
 </div>

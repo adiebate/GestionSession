@@ -55,28 +55,28 @@ class Categorie
     /**
      * @return Collection|Module[]
      */
-    public function getAppartenir(): Collection
+    public function getModule(): Collection
     {
         return $this->appartenir;
     }
 
-    public function addAppartenir(Module $appartenir): self
+    public function addModule(Module $module): self
     {
-        if (!$this->appartenir->contains($appartenir)) {
-            $this->appartenir[] = $appartenir;
-            $appartenir->setCategorie($this);
+        if (!$this->module->contains($module)) {
+            $this->module[] = $module;
+            $module->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeAppartenir(Module $appartenir): self
+    public function removeModule(Module $module): self
     {
-        if ($this->appartenir->contains($appartenir)) {
-            $this->appartenir->removeElement($appartenir);
+        if ($this->module->contains($module)) {
+            $this->module->removeElement($module);
             // set the owning side to null (unless already changed)
-            if ($appartenir->getCategorie() === $this) {
-                $appartenir->setCategorie(null);
+            if ($module->getCategorie() === $this) {
+                $module->setCategorie(null);
             }
         }
 
