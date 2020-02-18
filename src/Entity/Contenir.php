@@ -23,6 +23,7 @@ class Contenir
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="contenir")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $module;
 

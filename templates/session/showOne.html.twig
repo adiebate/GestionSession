@@ -20,6 +20,7 @@
             <th>Module</th>
             <th>Nb Jours</th>
             <th>Catégorie</th>
+            <th>Action</th>
         </thead>
         {% for prog in session.contenir %}
     
@@ -34,11 +35,13 @@
                 <td>
                     {{ prog.module.categorie.intitule }}
                 </td>
+                <td><a href="{{ path('remove_one_module_from_session', {'id':session.id, 'id_contenir':prog.id}) }}">Delete</a></td>
             </tr>
         </tbody>
 
     
         {% endfor %}
+
 
        
     </table>

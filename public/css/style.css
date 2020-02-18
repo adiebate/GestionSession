@@ -72,3 +72,12 @@ table, th, td {
     display: flex;
     
   }
+
+  .homeButton{
+    border: 3px dashed white;
+    padding: 0.5em 1em;
+    transition: 1s;
+  }
+  .homeButton:hover{
+    border: 3px dashed black;
+  }

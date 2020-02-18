@@ -154,6 +154,20 @@ class SessionController extends AbstractController
     return $this->redirectToRoute("session_index");
  }
 
+        /**
+    * @Route("/{id}/removemodule/{id_contenir}", name="remove_one_module_from_session")
+    */
+    public function removeOneModuleFromSession(Session $session, Request $request){
+
+        $id = $request->attributes->get('id_contenir');
+        $entityManager = $this->getDoctrine()->getManager();
+        $contenir = $this->getDoctrine()->getRepository(Contenir::class)->find($id);
+        $session->removeContenir($contenir);
+        $entityManager->flush();
+
+
+    return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
+ }
 
     /**
     * @Route("/{id}/removestagiaire/{id_stagiaire}", name="remove_one_stagiaire_from_session")
