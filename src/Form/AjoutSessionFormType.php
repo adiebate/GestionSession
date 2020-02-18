@@ -26,7 +26,9 @@ class AjoutSessionFormType extends AbstractType
                 },
                 'choice_label' => 'intitule',
             ])
-            ->add("Valider", SubmitType::class)
+            ->add("Valider", SubmitType::class,[
+                'attr' => ['class' => 'submit'],
+            ])
 
         ;
     }

@@ -36,7 +36,9 @@ class SessionFormType extends AbstractType
                 'label' => 'Nombre de places disponible',
             ])
             // ->add('')
-            ->add('Valider', SubmitType::class);
+            ->add('Valider', SubmitType::class, [
+                'attr' => ['class' => 'submit']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -26,7 +26,9 @@ class AjoutModuleFormType extends AbstractType
                 'choice_label' => 'intitule',
             ])
             ->add('NbJours')
-            ->add("Valider", SubmitType::class)
+            ->add("Valider", SubmitType::class,[
+                'attr' => ['class' => 'submit'],
+            ])
         ;
     }
 

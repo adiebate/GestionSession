@@ -82,3 +82,25 @@ table, th, td {
   .homeButton:hover{
     border: 3px dashed black;
   }
+
+  .boiteform{
+      max-width: 200px;
+      margin: auto;
+  }
+
+  .submit {
+      background-color: black;
+      color: white;
+      padding: 0.5em 1em;
+      border-radius: 7px;
+  }
+
+  form>div input, form>div select{
+    margin:0.5em 0;
+    padding: 0.25em;
+  }
+
+  form>div>div:last-of-type{
+      margin-top: 1em;
+      text-align: center;
+  }

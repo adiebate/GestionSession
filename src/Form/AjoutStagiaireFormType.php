@@ -25,7 +25,9 @@ class AjoutStagiaireFormType extends AbstractType
             },
             'choice_label' => 'nom',
         ])
-        ->add("Valider", SubmitType::class);
+        ->add("Valider", SubmitType::class,[
+            'attr' => ['class' => 'submit'],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
