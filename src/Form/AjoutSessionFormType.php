@@ -22,6 +22,7 @@ class AjoutSessionFormType extends AbstractType
                 'mapped' => false,
                 'query_builder' => function (SessionRepository $er) {
                     return $er->createQueryBuilder('se')
+                        // ->where('se.')
                         ->orderBy('se.intitule');
                 },
                 'choice_label' => 'intitule',

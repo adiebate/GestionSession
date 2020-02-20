@@ -20,7 +20,7 @@ class AjoutStagiaireFormType extends AbstractType
             'class' => Stagiaire::class,
             'mapped' => false,
 
-            'query_builder' => function (StagiaireRepository $er) {
+            'query_builder' => function(StagiaireRepository $er) {
                 // return $er->getListDontInscritStagiaires();
 
                 return $er->createQueryBuilder('st')
@@ -29,7 +29,8 @@ class AjoutStagiaireFormType extends AbstractType
                     ->orderBy('st.nom');
             },
             'choice_label' => function(Stagiaire $stagiaire){
-                return $stagiaire->getNom() .' '. $stagiaire->getPrenom(); }
+                return $stagiaire->getFullName(); 
+            }
         ])
         ->add("Valider", SubmitType::class,[
             'attr' => ['class' => 'submit'],

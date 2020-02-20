@@ -12,7 +12,14 @@
     
 
     <div class="boiteform">
-        {{ form(ajoutstagiaireform) }} 
+        <select name="stagiaire">
+            {% for stagiaire in stagiairesDispo %}
+                <option value="{{ stagiaire.id }}">{{ stagiaire.fullName }}</option>
+
+            {% endfor %}
+
+        </select>
+        
     </div>
 
 

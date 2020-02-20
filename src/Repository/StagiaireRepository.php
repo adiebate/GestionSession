@@ -30,14 +30,14 @@ class StagiaireRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
-    // public function getListDontInscritStagiaires(){
-    //     $entityManager = $this->getEntityManager();
-    //     $query = $entityManager->createQuery(
-    //         "SELECT st
-    //         FROM App\Entity\Stagiaire st, App\Entity\Session se
-    //         WHERE st.id NOT LIKE se.st.id"
-    //     );
-    // }
+    public function getListDontInscritStagiaires(){
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT st
+            FROM App\Entity\Stagiaire st, App\Entity\Session se
+            WHERE st.id NOT IN se.st.id"
+        );
+    }
 
 
 

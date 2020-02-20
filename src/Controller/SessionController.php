@@ -10,9 +10,12 @@ use App\Entity\Stagiaire;
 use App\Form\SessionFormType;
 use App\Form\AjoutModuleFormType;
 use App\Form\AjoutStagiaireFormType;
+use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -49,6 +52,7 @@ class SessionController extends AbstractController
             
             $newSession = $form->getData();
 
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newSession);
             $entityManager->flush();
@@ -97,12 +101,18 @@ class SessionController extends AbstractController
     */
     public function AjoutStagiaireForm(Session $session, Request $request, EntityManagerInterface $em){
 
-        $form = $this->createForm(AjoutStagiaireFormType::class);
+        $stagiaires = $em->getRepository(Stagiaire::class)->findAll();
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        foreach($stagiaires as $key => $stagiaire){
+            if($session->getStagiaires()->contains($stagiaire)){
+                unset($stagiaires[$key]);
+            }
+        }
+
+        
+        /*if ($form->isSubmitted() && $form->isValid()) {
             
-            $newAjoutStagiaire = $form->get('stagiaire')->getData();
+            $newAjoutStagiaire = $request->get('stagiaire')->getData();
 
             $session->addStagiaire($newAjoutStagiaire);
 
@@ -111,10 +121,10 @@ class SessionController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
-        }
+        }*/
 
         return $this->render('session/ajoutStagiaireForm.html.twig', [
-            'ajoutstagiaireform' => $form->createView(),
+            'stagiairesDispo' => $stagiaires,
             'session' => $session
         ]);
      }

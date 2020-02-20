@@ -8,11 +8,13 @@ use App\Repository\ModuleRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class SessionFormType extends AbstractType
 {
@@ -30,7 +32,24 @@ class SessionFormType extends AbstractType
                 'label' => 'Date de fin',
                 'years' => range(date('Y'), date('Y')+2),
                 'format' => 'ddMMyyyy',
-                'invalid_message' => 'date invalide'
+                'invalid_message' => 'date invalide',
+
+                'constraints' => [
+                    new Callback(function($object, ExecutionContextInterface $context){
+                        $debut = $context->getRoot()->getData()['Datedebut'];
+                        $fin = $object;
+
+                            if(is_a($debut, \DateType::class) && is_a($fin, \DateType::class)) {
+                                is($fin->format('U') - $debut->format('U') < 0) {
+                                    $context
+                                        ->buildViolation('La date de fin doit être après la date de début')
+                                        ->addViolation()
+                                };
+                            }
+
+                    }),
+                ]
+
             ])
             ->add('NbPlaces', IntegerType::class,  [
                 'label' => 'Nombre de places disponible',

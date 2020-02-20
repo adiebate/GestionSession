@@ -80,7 +80,7 @@ class StagiaireController extends AbstractController
             // $entityManager->persist($stagiaire);
             $em->flush();
 
-            return $this->redirectToRoute('stagiaire_index');
+            return $this->redirectToRoute('showOne_stagiaire', array('id' => $stagiaire->getId()));
         }
 
         return $this->render('stagiaire/ajoutSessionForm.html.twig', [

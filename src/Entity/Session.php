@@ -108,6 +108,10 @@ class Session
         return $this;
     }
 
+    public function isFull(){
+        return ($this->nbPlaces == count($this->stagiaires)) ? true : false;
+    }
+
     /**
      * @return Collection|Contenir[]
      */
@@ -150,11 +154,14 @@ class Session
     public function addStagiaire(Stagiaire $stagiaire): self
     {
         if (!$this->stagiaires->contains($stagiaire)) {
-            $this->stagiaires[] = $stagiaire;
-            $stagiaire->addSession($this);
+            
+            if($this->NbPlaces() > count($this->stagiaires)){
+                $this->stagiaires[] = $stagiaire;
+                $stagiaire->addSession($this);
+                return true;
+            }
         }
-
-        return $this;
+        return false;
     }
 
     public function removeStagiaire(Stagiaire $stagiaire): self
