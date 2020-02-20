@@ -11,17 +11,27 @@
 
     
 
+{#
     <div class="boiteform">
-        <select name="stagiaire">
-            {% for stagiaire in stagiairesDispo %}
-                <option value="{{ stagiaire.id }}">{{ stagiaire.fullName }}</option>
-
-            {% endfor %}
-
-        </select>
+        <form action="{{ path('ajout_stagiaire', {'id':session.id}) }}" method="post">
+            <div>
+                <select name="stagiaire" id="stagiaire">
+                    {% for stagiaire in stagiairesDispo %}
+                        <option value="{{ stagiaire.id }}">{{ stagiaire.fullName }}</option>
         
+                    {% endfor %}
+                </select>
+                <div>
+                    <input class="submit" type="submit" value="Ajouter">
+                </div>
+            </div>
+        </form>
     </div>
+#}
 
+    <div class="boiteform">
+        {{ form(ajout_stagiaire_form) }}
+    </div>
 
 </div>
 {% endblock %}

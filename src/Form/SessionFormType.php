@@ -6,6 +6,7 @@ use App\Entity\Module;
 use App\Entity\Session;
 use App\Repository\ModuleRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Callback;
@@ -23,33 +24,18 @@ class SessionFormType extends AbstractType
         $builder
             ->add('intitule', TextType::class )
             ->add('DateDebut', DateType::class, [
+                'data' => new \DateTime('now'),
                 'label' => 'Date de début',
                 'years' => range(date('Y'), date('Y')+2),
                 'format' => 'ddMMyyyy',
                 'invalid_message' => 'date invalide'
             ])
-            ->add('DateFin', DateType::class, [                
+            ->add('DateFin', DateType::class, [
+                'data' => new \DateTime('now'),                
                 'label' => 'Date de fin',
                 'years' => range(date('Y'), date('Y')+2),
                 'format' => 'ddMMyyyy',
                 'invalid_message' => 'date invalide',
-
-                'constraints' => [
-                    new Callback(function($object, ExecutionContextInterface $context){
-                        $debut = $context->getRoot()->getData()['Datedebut'];
-                        $fin = $object;
-
-                            if(is_a($debut, \DateType::class) && is_a($fin, \DateType::class)) {
-                                is($fin->format('U') - $debut->format('U') < 0) {
-                                    $context
-                                        ->buildViolation('La date de fin doit être après la date de début')
-                                        ->addViolation()
-                                };
-                            }
-
-                    }),
-                ]
-
             ])
             ->add('NbPlaces', IntegerType::class,  [
                 'label' => 'Nombre de places disponible',

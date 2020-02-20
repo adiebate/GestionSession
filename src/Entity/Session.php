@@ -6,6 +6,7 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
@@ -26,11 +27,17 @@ class Session
 
     /**
      * @ORM\Column(type="date")
+     *
+     * 
      */
     private $DateDebut;
 
     /**
      * @ORM\Column(type="date")
+     *    @Assert\Expression(
+     *      "this.getDateDebut() <= this.getDateFin()",
+     *      message="La date de fin ne doit pas être antérieure à la date début"
+     *      )
      */
     private $DateFin;
 
@@ -48,6 +55,8 @@ class Session
      * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="sessions")
      */
     private $stagiaires;
+
+
 
     public function __construct()
     {
@@ -108,7 +117,7 @@ class Session
         return $this;
     }
 
-    public function isFull(){
+    public function getIsFull(){
         return ($this->nbPlaces == count($this->stagiaires)) ? true : false;
     }
 
@@ -155,13 +164,13 @@ class Session
     {
         if (!$this->stagiaires->contains($stagiaire)) {
             
-            if($this->NbPlaces() > count($this->stagiaires)){
+            if($this->getNbPlaces() > count($this->stagiaires)){
                 $this->stagiaires[] = $stagiaire;
                 $stagiaire->addSession($this);
-                return true;
+        
             }
         }
-        return false;
+        return $this;
     }
 
     public function removeStagiaire(Stagiaire $stagiaire): self

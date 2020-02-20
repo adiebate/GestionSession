@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContenirRepository")
+ * 
  */
 class Contenir
 {
@@ -50,6 +52,8 @@ class Contenir
         return $this;
     }
 
+
+
     public function getModule(): ?Module
     {
         return $this->module;
@@ -57,6 +61,7 @@ class Contenir
 
     public function setModule(?Module $module): self
     {
+        
         $this->module = $module;
 
         return $this;
@@ -72,5 +77,9 @@ class Contenir
         $this->session = $session;
 
         return $this;
+    }
+
+    public function getFullContenir(Session $session, Module $module){
+        return $this->$session.'-'.$this->$module;
     }
 }

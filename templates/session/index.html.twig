@@ -9,6 +9,17 @@
 <div class="example-wrapper centrer">
     <h1>Liste des sessions</h1>
 
+    {% for message in app.flashes('success') %}
+    <div class="success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+    <div class="error">
+        {{ message }}
+    </div>
+    {% endfor %}
+
     <table>
         <thead>
             <th>Intitulé Session</th>

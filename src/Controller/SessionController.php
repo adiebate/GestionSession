@@ -57,9 +57,9 @@ class SessionController extends AbstractController
             $entityManager->persist($newSession);
             $entityManager->flush();
 
+            $this->addFlash("success", "La session a bien été crée !");
             return $this->redirectToRoute('session_index');
         }
-
         return $this->render('session/sessionForm.html.twig', [
         'session_form' => $form->createView()
         ]);
@@ -86,6 +86,7 @@ class SessionController extends AbstractController
             $entityManager->persist($newAjoutModule);
             $entityManager->flush();
 
+            $this->addFlash("success", "Le module a bien été ajouté !");
             return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
         }
 
@@ -101,30 +102,49 @@ class SessionController extends AbstractController
     */
     public function AjoutStagiaireForm(Session $session, Request $request, EntityManagerInterface $em){
 
-        $stagiaires = $em->getRepository(Stagiaire::class)->findAll();
 
-        foreach($stagiaires as $key => $stagiaire){
-            if($session->getStagiaires()->contains($stagiaire)){
-                unset($stagiaires[$key]);
-            }
-        }
+    // Liste déroulante adapté
+        // $stagiaires = $em->getRepository(Stagiaire::class)->findAll();
 
-        
-        /*if ($form->isSubmitted() && $form->isValid()) {
+        // foreach($stagiaires as $key => $stagiaire){
+        //     if($session->getStagiaires()->contains($stagiaire)){
+        //         unset($stagiaires[$key]);
+        //     }
+        // }
+
+        // $stagiaire->handleRequest($request);
+
+        // if($stagiaire->isSubmitted()){
+
+        //     $stagiaire = $request->get('stagiaire')->getData();
+
+        //     $session->addStagiaire($stagiaire);
+
+        //     $em->flush();
+        // }
+
+
+
+    
+         $form = $this->createForm(AjoutStagiaireFormType::class, $session);
+
+
+         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             
-            $newAjoutStagiaire = $request->get('stagiaire')->getData();
+            $newAjoutStagiaire = $form->get('stagiaire')->getData();
 
             $session->addStagiaire($newAjoutStagiaire);
 
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($stagiaire);
             $em->flush();
 
+            $this->addFlash("success", "Stagiaire bien ajouté !");
             return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
-        }*/
+        }
 
         return $this->render('session/ajoutStagiaireForm.html.twig', [
-            'stagiairesDispo' => $stagiaires,
+            // 'stagiairesDispo' => $stagiaires,
+            "ajout_stagiaire_form" => $form->createView(),
             'session' => $session
         ]);
      }
@@ -146,7 +166,7 @@ class SessionController extends AbstractController
 
             return $this->redirectToRoute("session_index");
         }
-
+        $this->addFlash("success", "La session a bien été modifié !");
         return $this->render('session/sessionForm.html.twig', [
             "session_form" => $form->createView()
         ]);
@@ -160,7 +180,7 @@ class SessionController extends AbstractController
         $entityManager->remove($session);
         $entityManager->flush();
 
-
+        $this->addFlash("success", "La session a été supprimé avec succès !");
     return $this->redirectToRoute("session_index");
  }
 
@@ -178,7 +198,7 @@ class SessionController extends AbstractController
         $entityManager->remove($contenir);
         $entityManager->flush();
 
-
+        $this->addFlash("success", "Le module a bien été supprimé de la session !");
     return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
  }
 
@@ -193,7 +213,7 @@ class SessionController extends AbstractController
             $session->removeStagiaire($stagiaire);
             $entityManager->flush();
 
-
+            $this->addFlash("success", "Le stagiaire a bien été supprimé de la session !");
         return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
      }
 

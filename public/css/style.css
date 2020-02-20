@@ -118,6 +118,18 @@ table, th, td {
     font-weight: bold;
   }
 
-  .accueil{
-      
-  }
+.success{
+    font-weight: bold;
+    color:green;
+    background: rgba(0, 128, 0, 0.2);
+    padding: 0.5em;
+    font-size:1.5em;
+}
+
+.error{
+    font-weight: bold;
+    color:red;
+    background: rgba(255, 0, 0, 0.2);
+    padding: 0.5em;
+    font-size:1.5em;
+}
