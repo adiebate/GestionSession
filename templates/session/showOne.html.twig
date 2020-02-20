@@ -69,8 +69,11 @@
         </tbody>
     </table>
     <br>
+    {% if (session.nbPlaces) - (session.stagiaires|length) > 0 %}
     <a class="submit" href="{{ path('ajout_stagiaire', {'id':session.id}) }}">Ajouter un stagiaire à la session</a>
-
+    {% else %}
+    <p style="color:red">La session est pleine</p>
+    {% endif %}
 
 
 

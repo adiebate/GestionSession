@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Session;
 use App\Entity\Stagiaire;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Stagiaire|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,6 +30,18 @@ class StagiaireRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function getListDontInscritStagiaires(){
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT st
+            FROM App\Entity\Stagiaire st, App\Entity\Session se
+            WHERE st.id NOT IN se.st.id"
+        );
+    }
+
+
+
+    
     // /**
     //  * @return Stagiaire[] Returns an array of Stagiaire objects
     //  */

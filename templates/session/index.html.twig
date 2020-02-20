@@ -43,7 +43,12 @@
                     {{ session.stagiaires|length}}
                 </td>
                 <td>
-                    {{ (session.nbPlaces) - (session.stagiaires|length)}}
+                    {% if (session.nbPlaces) - (session.stagiaires|length) > 0 %}
+                        <span style="color:green;">{{ (session.nbPlaces) - (session.stagiaires|length)}}</span>
+                    {% else %}
+                        <span style="color:red;">0</span>
+                    {% endif %}
+                    
                 </td>
                 <td>
                     <a class="action" href="{{ path('edit_session', {'id':session.id}) }}">&expectation;</a>
