@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Entity\Stagiaire;
 use App\Form\StagiaireFormType;
 use App\Form\AjoutSessionFormType;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,9 +43,10 @@ class StagiaireController extends AbstractController
         $newStagiaire = new Stagiaire();
         $form = $this->createForm(StagiaireFormType::class, $newStagiaire);
 
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
             $newStagiaire = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
