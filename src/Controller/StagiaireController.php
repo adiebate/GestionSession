@@ -48,7 +48,6 @@ class StagiaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $newStagiaire = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newStagiaire);
             $entityManager->flush();
