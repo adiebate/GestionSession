@@ -46,7 +46,7 @@
         <tbody>
             {% for session in stagiaire.sessions %}
             <tr class="centrer">
-                <td> <a href="{{ path('show_one_session', {'id':session.id}) }}">{{session.intitule}}</td>
+                <td> <a class="bold" href="{{ path('show_one_session', {'id':session.id}) }}">{{session.intitule}}</td>
                 <td>Du {{session.dateDebut | date("d/m/Y")}} au {{session.datefin | date("d/m/Y")}}</td>
                 <td><a href="{{ path('remove_one_session_from_stagiaire', {'id':stagiaire.id, 'id_session':session.id}) }}">&xotime;</a></td>
             </tr>
