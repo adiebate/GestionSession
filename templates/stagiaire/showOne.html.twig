@@ -10,6 +10,17 @@
 
 
     <h1 class="centrer">Détails d'un stagiaire</h1>
+    
+    {% for message in app.flashes('success') %}
+    <div class="success centrer">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+    <div class="error">
+        {{ message }}
+    </div>
+    {% endfor %} 
    <br>
     <div class="boiteStag">
         <h2>{{stagiaire.nom ~ ' ' ~ stagiaire.prenom}}</h2>

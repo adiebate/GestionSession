@@ -6,8 +6,20 @@
 
 <a class="retour" href="{{ path('home_index') }}">Retour</a>
 
-<div class="example-wrapper">
+<div class="example-wrapper centrer">
    <h1 class="centrer">Liste des stagiaires</h1>
+   
+   {% for message in app.flashes('success') %}
+   <div class="success">
+       {{ message }}
+   </div>
+   {% endfor %}
+   {% for message in app.flashes('error') %}
+   <div class="error">
+       {{ message }}
+   </div>
+   {% endfor %}
+
     <table>
         <thead>
             <th>Nom Prénom</th>

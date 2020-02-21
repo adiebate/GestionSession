@@ -53,6 +53,7 @@ class StagiaireController extends AbstractController
             $entityManager->persist($newStagiaire);
             $entityManager->flush();
 
+            $this->addFlash("success", "Le stagiaire a bien été ajouté à la liste !");
             return $this->redirectToRoute('stagiaire_index');
         }
 
@@ -81,6 +82,7 @@ class StagiaireController extends AbstractController
             // $entityManager->persist($stagiaire);
             $em->flush();
 
+
             return $this->redirectToRoute('showOne_stagiaire', array('id' => $stagiaire->getId()));
         }
 
@@ -108,7 +110,7 @@ class StagiaireController extends AbstractController
 
             return $this->redirectToRoute("stagiaire_index");
         }
-
+        $this->addFlash("success", "Le stagiaire a bien été modifié");
         return $this->render('stagiaire/stagiaireForm.html.twig', [
             "stagiaire_form" => $form->createView()
         ]);
@@ -126,7 +128,7 @@ class StagiaireController extends AbstractController
         $stagiaire->removeSession($session);
         $entityManager->flush();
 
-
+        $this->addFlash("success", "La session a bien été supprimé !");
     return $this->redirectToRoute("showOne_stagiaire", array('id' => $stagiaire->getId()));
  }
 
@@ -138,7 +140,8 @@ class StagiaireController extends AbstractController
         $entityManager->remove($stagiaire);
         $entityManager->flush();
 
-
+    
+    $this->addFlash("success", "Le stagiaire a bien été supprimé !");
     return $this->redirectToRoute("stagiaire_index");
  }
 
@@ -146,6 +149,8 @@ class StagiaireController extends AbstractController
     * @Route("/{id}", name="showOne_stagiaire")
     */
     public function showOne(Stagiaire $stagiaire){
+
+        
         return $this->render('stagiaire/showOne.html.twig', ['stagiaire' => $stagiaire]
         );
     }

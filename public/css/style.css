@@ -123,7 +123,7 @@ table, th, td {
     color:green;
     background: rgba(0, 128, 0, 0.2);
     padding: 0.5em;
-    font-size:1.5em;
+    font-size:1.1em;
 }
 
 .error{
@@ -131,7 +131,7 @@ table, th, td {
     color:red;
     background: rgba(255, 0, 0, 0.2);
     padding: 0.5em;
-    font-size:1.5em;
+    font-size:1.1em;
 }
 
 form ul li {
