@@ -141,7 +141,7 @@ class StagiaireController extends AbstractController
         $entityManager->flush();
 
     
-    $this->addFlash("success", "Le stagiaire a bien été supprimé !");
+
     return $this->redirectToRoute("stagiaire_index");
  }
 
