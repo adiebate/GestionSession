@@ -7,10 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
- * @UniqueEntity(fields={"intitule"}, message="Session déjà existante")
+ * @UniqueEntity(fields={"intitule"}, message="Session déjà existante.")
  */
 class Session
 {
