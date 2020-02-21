@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
+ * @UniqueEntity(fields={"intitule"}, message="Session déjà existante")
  */
 class Session
 {
@@ -27,8 +28,8 @@ class Session
 
     /**
      * @ORM\Column(type="date")
+     *
      * 
-     * @Assert\GreaterThanOrEqual("today", message="La session ne peut pas commencer avant aujourd'hui")
      */
     private $DateDebut;
 
