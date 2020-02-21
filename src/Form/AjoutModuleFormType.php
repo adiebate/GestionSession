@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Module;
+use App\Entity\Session;
 use App\Entity\Contenir;
 use App\Repository\ModuleRepository;
 use App\Repository\ContenirRepository;

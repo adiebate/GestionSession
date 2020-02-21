@@ -11,11 +11,11 @@
 
     
 
-{#
+
     <div class="boiteform">
         <form action="{{ path('ajout_stagiaire', {'id':session.id}) }}" method="post">
             <div>
-                <select name="stagiaire" id="stagiaire">
+                <select name="stagiaire">
                     {% for stagiaire in stagiairesDispo %}
                         <option value="{{ stagiaire.id }}">{{ stagiaire.fullName }}</option>
         
@@ -27,11 +27,11 @@
             </div>
         </form>
     </div>
-#}
 
-    <div class="boiteform">
+
+    {# <div class="boiteform">
         {{ form(ajout_stagiaire_form) }}
-    </div>
+    </div> #}
 
 </div>
 {% endblock %}

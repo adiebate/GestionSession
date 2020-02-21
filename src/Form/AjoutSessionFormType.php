@@ -21,10 +21,10 @@ class AjoutSessionFormType extends AbstractType
                 'class' => Session::class,
                 'mapped' => false,
                 'query_builder' => function (SessionRepository $er) {
-                    return $er->createQueryBuilder('se')
-                        // ->where('se.getIsFull = false')
-                        
-                        ->orderBy('se.intitule');
+                    $qb = $er->createQueryBuilder('se');
+                    return $qb->andWhere($qb->expr()->gt('se.NbPlaces', ':nbstagiaires'))
+                              ->setParameter('nbstagiaires', $qb->expr()->count('se.stagiaires'))
+                              ->orderBy('se.intitule');
                 },
                 'choice_label' => 'intitule',
             ])

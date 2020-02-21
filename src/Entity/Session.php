@@ -59,12 +59,11 @@ class Session
      */
     private $stagiaires;
 
-
-
     public function __construct()
     {
         $this->contenir = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -120,10 +119,7 @@ class Session
         return $this;
     }
 
-    public function getIsFull(){
-        return ($this->nbPlaces == count($this->stagiaires)) ? true : false;
-    }
-
+   
     /**
      * @return Collection|Contenir[]
      */

@@ -104,49 +104,48 @@ class SessionController extends AbstractController
 
 
     // Liste déroulante adapté
-        // $stagiaires = $em->getRepository(Stagiaire::class)->findAll();
+        $stagiaires = $em->getRepository(Stagiaire::class)->findAll();
 
-        // foreach($stagiaires as $key => $stagiaire){
-        //     if($session->getStagiaires()->contains($stagiaire)){
-        //         unset($stagiaires[$key]);
-        //     }
-        // }
+        foreach($stagiaires as $key => $stagiaire){
+            if($session->getStagiaires()->contains($stagiaire)){
+                unset($stagiaires[$key]);
+            }
+        }
 
-        // $stagiaire->handleRequest($request);
+        if($stagiaire_id = $request->request->get('stagiaire')){
+            $stagiaire = $em->getRepository(Stagiaire::class)->findOneBy(['id' => $stagiaire_id]);
 
-        // if($stagiaire->isSubmitted()){
-
-        //     $stagiaire = $request->get('stagiaire')->getData();
-
-        //     $session->addStagiaire($stagiaire);
-
-        //     $em->flush();
-        // }
-
-
-
-    
-         $form = $this->createForm(AjoutStagiaireFormType::class, $session);
-
-
-         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $newAjoutStagiaire = $form->get('stagiaire')->getData();
-
-            $session->addStagiaire($newAjoutStagiaire);
-
+            $session->addStagiaire($stagiaire);
             $em->flush();
-
             $this->addFlash("success", "Stagiaire bien ajouté !");
             return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
         }
-
+        
         return $this->render('session/ajoutStagiaireForm.html.twig', [
-            // 'stagiairesDispo' => $stagiaires,
-            "ajout_stagiaire_form" => $form->createView(),
+            'stagiairesDispo' => $stagiaires,
+            //"ajout_stagiaire_form" => $form->createView(),
             'session' => $session
         ]);
+
+
+
+        // Formulaire Symfony
+        //  $form = $this->createForm(AjoutStagiaireFormType::class, $session);
+
+        //  $form->handleRequest($request);
+        // if ($form->isSubmitted() && $form->isValid()) {
+            
+        //     $newAjoutStagiaire = $form->get('stagiaire')->getData();
+
+        //     $session->addStagiaire($newAjoutStagiaire);
+
+        //     $em->flush();
+
+        //     
+        //     
+        // }
+
+       
      }
 
 

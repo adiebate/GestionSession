@@ -57,4 +57,18 @@ class SessionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findSessionsDispo() {
+        $er = $this->getEntityManager()->createQuery(
+            'SELECT se 
+            FROM App\Entity\Session se 
+            WHERE se.NbPlaces > COUNT(se.stagiaires) 
+            ORDER BY se.intitule ASC'
+        );
+        return $er->getQuery()->getResult();
+        /*$qb = $er->createQueryBuilder('se');
+        return $qb->andWhere($qb->expr()->gt('se.NbPlaces',  $qb->expr()->count('se.stagiaires')))
+                  
+                  ->orderBy('se.intitule');*/
+    }
 }
