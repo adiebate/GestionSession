@@ -19,12 +19,12 @@ class AjoutSessionFormType extends AbstractType
             
             ->add('session', EntityType::class, [
                 'class' => Session::class,
-                'mapped' => false,
+                
                 'query_builder' => function (SessionRepository $er) {
+                     
                     $qb = $er->createQueryBuilder('se');
-                    return $qb->andWhere($qb->expr()->gt('se.NbPlaces', ':nbstagiaires'))
-                              ->setParameter('nbstagiaires', $qb->expr()->count('se.stagiaires'))
-                              ->orderBy('se.intitule');
+                    return $qb->where($qb->expr()->gt('se.nbPlaces', $qb->expr()->count('se.stagiaires')))
+                            ->orderBy('se.intitule');
                 },
                 'choice_label' => 'intitule',
             ])

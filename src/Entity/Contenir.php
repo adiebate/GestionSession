@@ -2,11 +2,18 @@
 
 namespace App\Entity;
 
+use App\Entity\Module;
+use App\Entity\Session;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContenirRepository")
+ * @ORM\Table(name="contenir",
+ *              uniqueConstraints={
+ *                  @ORM\UniqueConstraint(name="contenir_unique",
+ *                      columns={"module_id", "session_id"})
+ *              })
  * 
  */
 class Contenir
@@ -77,9 +84,5 @@ class Contenir
         $this->session = $session;
 
         return $this;
-    }
-
-    public function getFullContenir(Session $session, Module $module){
-        return $this->$session.'-'.$this->$module;
     }
 }

@@ -124,6 +124,7 @@ table, th, td {
     background: rgba(0, 128, 0, 0.2);
     padding: 0.5em;
     font-size:1.1em;
+    text-align: center;
 }
 
 .error{
@@ -132,6 +133,7 @@ table, th, td {
     background: rgba(255, 0, 0, 0.2);
     padding: 0.5em;
     font-size:1.1em;
+    text-align: center;
 }
 
 form ul li {

@@ -82,4 +82,35 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * @return Collection|Module[]
+     */
+    public function getAppartenir(): Collection
+    {
+        return $this->appartenir;
+    }
+
+    public function addAppartenir(Module $appartenir): self
+    {
+        if (!$this->appartenir->contains($appartenir)) {
+            $this->appartenir[] = $appartenir;
+            $appartenir->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppartenir(Module $appartenir): self
+    {
+        if ($this->appartenir->contains($appartenir)) {
+            $this->appartenir->removeElement($appartenir);
+            // set the owning side to null (unless already changed)
+            if ($appartenir->getCategorie() === $this) {
+                $appartenir->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
 }

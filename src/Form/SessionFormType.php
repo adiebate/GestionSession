@@ -24,17 +24,18 @@ class SessionFormType extends AbstractType
         $builder
             ->add('intitule', TextType::class )
             ->add('DateDebut', DateType::class, [
+                'widget' => "single_text",
                 'data' => new \DateTime('now'),
                 'label' => 'Date de début',
                 'years' => range(date('Y'), date('Y')+2),
-                'format' => 'ddMMyyyy',
+                
                 'invalid_message' => 'date invalide'
             ])
             ->add('DateFin', DateType::class, [
+                'widget' => "single_text",
                 'data' => new \DateTime('now'),                
                 'label' => 'Date de fin',
                 'years' => range(date('Y'), date('Y')+2),
-                'format' => 'ddMMyyyy',
                 'invalid_message' => 'date invalide',
             ])
             ->add('NbPlaces', IntegerType::class,  [

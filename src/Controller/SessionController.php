@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -83,11 +84,18 @@ class SessionController extends AbstractController
             $newAjoutModule = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newAjoutModule);
-            $entityManager->flush();
+            try{
+                $entityManager->persist($newAjoutModule);
+                $entityManager->flush(); 
+                $this->addFlash("success", "Le module a bien été ajouté !");
+                return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
+            }
+            catch( UniqueConstraintViolationException $e){
+                $this->addFlash("error", "Le module existe déjà dans la Session");
+            }
 
-            $this->addFlash("success", "Le module a bien été ajouté !");
-            return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));
+           
+            
         }
 
         return $this->render('session/ajoutModuleForm.html.twig', [
@@ -116,6 +124,7 @@ class SessionController extends AbstractController
             $stagiaire = $em->getRepository(Stagiaire::class)->findOneBy(['id' => $stagiaire_id]);
 
             $session->addStagiaire($stagiaire);
+           
             $em->flush();
             $this->addFlash("success", "Stagiaire bien ajouté !");
             return $this->redirectToRoute("show_one_session", array('id' => $session->getId()));

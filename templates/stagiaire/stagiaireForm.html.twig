@@ -9,6 +9,16 @@
 <div>
     <h1 class="centrer">Ajouter un stagiaire</h1>
 
+    {% for message in app.flashes('success') %}
+    <div class="success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+    <div class="error">
+        {{ message }}
+    </div>
+    {% endfor %}
     
 <div class="boiteform">
     {{ form(stagiaire_form) }}
