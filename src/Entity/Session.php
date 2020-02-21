@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
- * @UniqueEntity(fields={"intitule"}, message="Session déjà existante")
+ * @UniqueEntity(fields={"intitule"}, message="Session déjà existante.")
  */
 class Session
 {
