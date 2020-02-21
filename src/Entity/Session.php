@@ -30,7 +30,7 @@ class Session
     /**
      * @ORM\Column(type="date")
      *
-     * 
+     * @Assert\GreaterThanOrEqual("today", message="La session ne peut pas commencer avant aujourd'hui")
      */
     private $DateDebut;
 
