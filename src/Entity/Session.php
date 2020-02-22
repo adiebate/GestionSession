@@ -49,8 +49,6 @@ class Session
      */
     private $nbPlaces;
 
-    private $nbPlacesRestantes;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Contenir", mappedBy="session", cascade={"remove"})
      */
@@ -65,7 +63,6 @@ class Session
     {
         $this->contenir = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
-        $this->nbPlacesRestantes = $this->nbPlaces - count($this->stagiaires);
     }
 
     public function getId(): ?int
@@ -165,10 +162,9 @@ class Session
     {
         if (!$this->stagiaires->contains($stagiaire)) {
             
-            if($this->nbPlacesRestantes > 0){
+            if($this->nbPlaces - count($this->stagiaires) > 0){
                 $this->stagiaires[] = $stagiaire;
                 $stagiaire->addSession($this);
-                $this->nbPlacesRestantes--;
             }
         }
         return $this;
@@ -178,9 +174,7 @@ class Session
     {
         if ($this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->removeElement($stagiaire);
-            $stagiaire->removeSession($this);
-            $this->nbPlacesRestantes++;
-            
+            $stagiaire->removeSession($this);            
         }
 
         return $this;

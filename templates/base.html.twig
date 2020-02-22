@@ -2,23 +2,40 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     </head>
-<header>
-    <nav>
-        <a class="accueil" href="{{ path('home_index') }}">Accueil</a>
-    </nav>
-</header>
-    
-
     <body>
+        <header>
+            <nav>
+                <a class="accueil" href="{{ path('home_index') }}">Accueil</a>
+            </nav>
+        </header>
         <section>
-            {% block body %}{% endblock %}
+            <div>
+
+                        {% block body %}{% endblock %}
+                    </div>
         </section>
+        
+        <footer class="centrer">
+            
+                <p>
+                    DL6 - @2020 - Elan Formation
+                </p>
+            
+            
+                <p class="absolute">
+                    Réalisé par Aliou et Sylvain
+                </p>
+            
+            
+    
+        </footer>
         {% block javascripts %}{% endblock %}
     </body>
+
 </html>

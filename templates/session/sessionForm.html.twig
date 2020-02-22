@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des sessions{% endblock %}
+{% block title %}Créer/Modifier une session{% endblock %}
 
 {% block body %}
 
 <a class="retour" href="{{ path('session_index') }}">Retour</a>
 
 <div class="example-wrapper">
-    <h1 class="centrer">Créer une session</h1>
+    <h1 class="centrer">Créer/Modifier une session</h1>
 
     {% for message in app.flashes('success') %}
     <div class="success">

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des sessions{% endblock %}
+{% block title %}Ajouter une session{% endblock %}
 
 {% block body %}
 
 <a class="retour" href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">Retour</a>
 
 <div class="example-wrapper">
-    <h1 class="centrer">Ajouter une session au stagiaire {{ stagiaire.nom ~ ' ' ~ stagiaire.prenom  }}</h1>
+    <h1 class="centrer">Ajouter une Session au Stagiaire {{ stagiaire.fullName  }}</h1>
 
     {% for message in app.flashes('success') %}
     <div class="success">

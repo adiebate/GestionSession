@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiaireController!{% endblock %}
+{% block title %}Liste des stagiaires{% endblock %}
 
 {% block body %}
 
@@ -33,7 +33,7 @@
 
         <tr class="centrer">
                 <td>
-                    <a class="bold" href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">{{ stagiaire.nom }} {{ stagiaire.prenom }}</a>
+                    <a class="bold" href="{{ path('showOne_stagiaire', {'id':stagiaire.id}) }}">{{ stagiaire.fullName }}</a>
                 </td>
 
                 <td>

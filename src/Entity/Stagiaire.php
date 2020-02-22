@@ -96,7 +96,7 @@ class Stagiaire
 
     public function getFullName(){
         
-        return $this->prenom." ".$this->nom;
+        return mb_strtoupper($this->nom)." ".$this->prenom;
     }
 
     public function getDateNaissance(): ?\DateTimeInterface

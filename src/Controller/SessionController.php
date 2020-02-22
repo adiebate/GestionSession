@@ -171,10 +171,10 @@ class SessionController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->flush();
-
+            $this->addFlash("success", "La session a bien été modifié !");
             return $this->redirectToRoute("session_index");
         }
-        $this->addFlash("success", "La session a bien été modifié !");
+        
         return $this->render('session/sessionForm.html.twig', [
             "session_form" => $form->createView()
         ]);

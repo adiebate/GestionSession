@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiareController!{% endblock %}
+{% block title %}Voir un stagiaire{% endblock %}
 
 {% block body %}
 
@@ -23,7 +23,7 @@
     {% endfor %} 
    <br>
     <div class="boiteStag">
-        <h2>{{stagiaire.nom ~ ' ' ~ stagiaire.prenom}}</h2>
+        <h2>{{stagiaire.nom|upper ~ ' ' ~ stagiaire.prenom}}</h2>
      
         <p><span class="bold">Né le:</span> {{stagiaire.dateNaissance | date("d/m/Y")}}<br>
             <span class="bold">Mail :</span> {{stagiaire.mail}}<br>

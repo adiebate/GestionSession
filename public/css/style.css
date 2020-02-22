@@ -3,16 +3,35 @@ body {
     color: white;
     font-size: 16px;
 }
-
+* {
+    box-sizing: border-box;
+}
 a {
     color: inherit;
     text-decoration: inherit;
 }
 
-header{
+header, footer{
     padding: 1em;
     background: rgba(0, 0, 0, 0.25);
 }
+footer{
+    position: relative;
+    text-align: center;
+}
+footer p{
+    margin: 0;
+}
+.absolute{
+    position: absolute;
+    right: 1em;
+    top:1em;
+}
+
+figure{
+    margin: 70px;
+}
+
 
 nav a {
     font-size: 1.5em;
@@ -67,7 +86,11 @@ table, th, td {
       margin: auto;
       background-color: white;
       color: black;
-      padding: 1em;
+      padding: 1em 1em 70px 1em ;
+  }
+
+  h1{
+      padding-top: 70px;
   }
 
   .flex{
@@ -143,4 +166,7 @@ form ul li {
 form ul{
     padding-left:0;
 
+}
+.mt4{
+    margin-top: 4em; 
 }

@@ -22,8 +22,8 @@ class AjoutSessionFormType extends AbstractType
                 
                 'query_builder' => function (SessionRepository $er) {
                      
-                    $qb = $er->createQueryBuilder('se');
-                    return $qb->where($qb->expr()->gt('se.nbPlaces', $qb->expr()->count('se.stagiaires')))
+                    $qb = $er->createQueryBuilder('se')
+                    // return $qb->where($qb->expr()->gt('se.nbPlaces', $qb->expr()->count('se.stagiaires')))
                             ->orderBy('se.intitule');
                 },
                 'choice_label' => 'intitule',
