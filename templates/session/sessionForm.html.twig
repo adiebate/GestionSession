@@ -7,8 +7,14 @@
 <a class="retour" href="{{ path('session_index') }}">Retour</a>
 
 <div class="example-wrapper">
-    <h1 class="centrer">Créer/Modifier une session</h1>
-
+    
+    {% if 'session/new' in app.request.uri %}
+    <h1 class="centrer">Créer une session</h1>
+    {% elseif 'session/edit' in app.request.uri %}
+        <h1 class="centrer">Modifier une session</h1>
+    {% endif %}
+    
+ 
     {% for message in app.flashes('success') %}
     <div class="success">
         {{ message }}

@@ -20,9 +20,29 @@
     </div>
     {% endfor %}
 
+
     <div class="boiteform">
-        {{ form(ajoutsessionform) }} 
+        <form action="{{ path('ajout_session', {'id':stagiaire.id}) }}" method="post">
+            <div>
+                <select name="session">
+                    {% for sess in sessionsDispo %}
+                        <option value="{{ sess.id }}">{{ sess.intitule }}</option>
+                        
+                    {% endfor %}
+                </select>
+                <div>
+                    <input class="submit" type="submit" value="Ajouter">
+                </div>
+            </div>
+        </form>
     </div>
+
+
+
+
+    {# <div class="boiteform">
+        {{ form(ajoutsessionform) }} 
+    </div> #}
 
 
 </div>

@@ -126,12 +126,15 @@ table, th, td {
     padding: 0.5em 1em;
     transition: 1s;
   }
+  img{
+      width: 300px;
+  }
   .homeButton:hover{
     border: 3px dashed black;
   }
 
   .boiteform{
-      max-width: 190px;
+      max-width: 180px;
       margin: auto;
   }
 

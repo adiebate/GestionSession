@@ -6,12 +6,8 @@
 
 
 <a class="retour" href="{{ path('stagiaire_index') }}">Retour</a>
-<div class="showOne">
 
-
-    <h1 class="centrer">Détails d'un stagiaire</h1>
-    
-    {% for message in app.flashes('success') %}
+  {% for message in app.flashes('success') %}
     <div class="success centrer">
         {{ message }}
     </div>
@@ -20,7 +16,13 @@
     <div class="error">
         {{ message }}
     </div>
-    {% endfor %} 
+    {% endfor %}
+
+<div class="showOne">
+
+    <h1 class="centrer">Détails d'un stagiaire</h1>
+    
+   
    <br>
     <div class="boiteStag">
         <h2>{{stagiaire.nom|upper ~ ' ' ~ stagiaire.prenom}}</h2>

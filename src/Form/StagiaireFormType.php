@@ -25,9 +25,10 @@ class StagiaireFormType extends AbstractType
             ]
             )
             ->add('dateNaissance',DateType::class, [
+                'widget' => "single_text",
                 'label' => 'Date de naissance*',
                 'years' => range(date('Y'), date('Y')-102),
-                'format' => 'dd-MM-yyyy',
+                
             ])
             ->add('ville')
 

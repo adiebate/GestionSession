@@ -69,27 +69,56 @@ class StagiaireController extends AbstractController
     */
     public function AjoutSessionForm(Stagiaire $stagiaire, Request $request, EntityManagerInterface $em){
 
-        $form = $this->createForm(AjoutSessionFormType::class);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+          // Liste déroulante adapté
+          $sessions = $em->getRepository(Session::class)->findAll();
+
+          foreach($sessions as $key => $session){
+              if($stagiaire->getSessions()->contains($session) || ($session->getNbPlaces() - count($session->getStagiaires()) <= 0)){
+                  unset($sessions[$key]);
+              }
+          }
+  
+          if($session_id = $request->request->get('session')){
+              $session = $em->getRepository(Session::class)->findOneBy(['id' => $session_id]);
+  
+              $stagiaire->addSession($session);
+             
+              $em->flush();
+              $this->addFlash("success", "Session bien ajouté !");
+              return $this->redirectToRoute("showOne_stagiaire", array('id' => $stagiaire->getId()));
+          }
+          
+          return $this->render('stagiaire/ajoutSessionForm.html.twig', [
+              'sessionsDispo' => $sessions,
+              //"ajout_stagiaire_form" => $form->createView(),
+              'stagiaire' => $stagiaire
+          ]);
+
+
+
+
+        // $form = $this->createForm(AjoutSessionFormType::class);
+
+        // $form->handleRequest($request);
+        // if ($form->isSubmitted() && $form->isValid()) {
             
-            $newAjoutSession = $form->get('session')->getData();
+        //     $newAjoutSession = $form->get('session')->getData();
 
-            $stagiaire->addSession($newAjoutSession);
+        //     $stagiaire->addSession($newAjoutSession);
 
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($stagiaire);
-            $em->flush();
+        //     // $entityManager = $this->getDoctrine()->getManager();
+        //     // $entityManager->persist($stagiaire);
+        //     $em->flush();
 
 
-            return $this->redirectToRoute('showOne_stagiaire', array('id' => $stagiaire->getId()));
-        }
+        //     return $this->redirectToRoute('showOne_stagiaire', array('id' => $stagiaire->getId()));
+        // }
 
-        return $this->render('stagiaire/ajoutSessionForm.html.twig', [
-            'ajoutsessionform' => $form->createView(),
-            'stagiaire' => $stagiaire
-        ]);
+        // return $this->render('stagiaire/ajoutSessionForm.html.twig', [
+        //     'ajoutsessionform' => $form->createView(),
+        //     'stagiaire' => $stagiaire
+        // ]);
      }
 
 
@@ -107,10 +136,10 @@ class StagiaireController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->flush();
-
+            $this->addFlash("success", "Le stagiaire a bien été modifié");
             return $this->redirectToRoute("stagiaire_index");
         }
-        $this->addFlash("success", "Le stagiaire a bien été modifié");
+        
         return $this->render('stagiaire/stagiaireForm.html.twig', [
             "stagiaire_form" => $form->createView()
         ]);

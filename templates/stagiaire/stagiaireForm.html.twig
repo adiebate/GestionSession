@@ -6,8 +6,12 @@
 
 <a class="retour" href="{{ path('stagiaire_index') }}">Retour</a>
 
-<div>
+<div>    
+    {% if 'stagiaire/new' in app.request.uri %}
     <h1 class="centrer">Ajouter un stagiaire</h1>
+    {% elseif 'stagiaire/edit' in app.request.uri %}
+        <h1 class="centrer">Modifier un stagiaire</h1>
+    {% endif %}
 
     {% for message in app.flashes('success') %}
     <div class="success">
