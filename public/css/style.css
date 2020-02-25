@@ -2,7 +2,9 @@ body {
     background-color: #4c8c98 ;
     color: white;
     font-size: 16px;
-    height:100vh
+}
+body, html{
+    height:100%;
 }
 * {
     box-sizing: border-box;
@@ -11,42 +13,33 @@ a {
     color: inherit;
     text-decoration: inherit;
 }
-
 header, footer{
-    padding: 0 1em;
+    padding: 1em;
     background: rgba(0, 0, 0, 0.25);
-    height:5vh;
 }
 footer{
-    padding: 0 1em;
-    background: rgba(0, 0, 0, 0.25);
-    height:10vh;
+    padding:2em;
+    background: rgba(0, 0, 0, 0.25);    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    margin-top:-82.4px;
     /* position: relative;
     text-align: center; */
 }
 footer p{
     margin: 0;
-}
-
-div.table, nav{
-    display:table;
-    height:100%;
-    width: 100%;
-}
-
-footer div p{
-    display: table-cell;
-    vertical-align: middle;
     font-weight: bold;
 }
-
 .absolute{
     /* position: absolute;
     right: 1em;
     top:1em; */
     align-self: start;
 }
-
 figure{
     margin: 70px;
 }
@@ -54,8 +47,6 @@ figure{
 
 nav a {
     font-size: 1.5em;
-    vertical-align: middle;
-    display: table-cell;
 }
 
 table{
@@ -102,10 +93,17 @@ table, th, td {
   .margin{
       margin:auto;
   }
-
+  .main{
+      display: flex;
+      flex-direction: column;
+      min-height:100%;
+      margin: 0 auto;
+      position: relative;
+     padding-bottom:82.4px;
+  }
   section{
-      min-height: 85vh;
-      max-width: 1000px;
+      width: 1000px;
+      height:100%;
       margin: auto;
       background-color: white;
       color: black;

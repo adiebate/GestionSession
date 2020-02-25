@@ -39,25 +39,29 @@ class StagiaireController extends AbstractController
     */
     public function newForm(Request $request){
 
-
+        //On instancie un nouvel objet Stagiaire
         $newStagiaire = new Stagiaire();
+        //On crée le formulaire avec cet objet vide
         $form = $this->createForm(StagiaireFormType::class, $newStagiaire);
 
-
+        //On récupère les données du formulaire
         $form->handleRequest($request);
+        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
             
             $newStagiaire = $form->getData();
 
+            //Grâce à Doctrine, on instancie l'entité, on crée la donnnée (persist) 
+            //et on met à jours la BDD (flush)
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newStagiaire);
             $entityManager->flush();
-
+            //On redirige vers la liste des stagiaires avec un message de validation
             $this->addFlash("success", "Le stagiaire a bien été ajouté à la liste !");
             return $this->redirectToRoute('stagiaire_index');
         }
 
-
+        //On envoie le formulaire vers la vue
         return $this->render('stagiaire/stagiaireForm.html.twig', [
         'stagiaire_form' => $form->createView()
         ]);
@@ -150,13 +154,16 @@ class StagiaireController extends AbstractController
     * @Route("/{id}/removesession/{id_session}", name="remove_one_session_from_stagiaire")
     */
     public function removeOneSessionFromStagiaire(Stagiaire $stagiaire, Request $request){
-
+        //On récupère l'ID de la session concerné passé en GET 
         $id = $request->attributes->get('id_session');
+        //Grâce à l'EntityManager de Symfony, on récupère l'objet Session à partir de son ID
         $entityManager = $this->getDoctrine()->getManager();
         $session = $this->getDoctrine()->getRepository(Session::class)->find($id);
+        //On supprime l'entrée Session du tableau lié à ce stagiaire
         $stagiaire->removeSession($session);
         $entityManager->flush();
 
+        //On redirige vers la page du stagiaire avec un joli message
         $this->addFlash("success", "La session a bien été supprimé !");
     return $this->redirectToRoute("showOne_stagiaire", array('id' => $stagiaire->getId()));
  }
@@ -165,12 +172,13 @@ class StagiaireController extends AbstractController
     * @Route("/delete/{id}", name="remove_one_stagiaire")
     */
     public function removeOnestagiaire(Stagiaire $stagiaire, EntityManagerInterface $entityManager){
-
+        //On appelle la fonction remove propre à Symfony.
+        //On lui passe l'objet Stagiaire courant
+        //On actualise la BDD
         $entityManager->remove($stagiaire);
         $entityManager->flush();
 
-    
-
+    //On redirige vers la liste des stagiaires
     return $this->redirectToRoute("stagiaire_index");
  }
 

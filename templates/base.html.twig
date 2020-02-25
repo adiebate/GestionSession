@@ -9,30 +9,28 @@
 
     </head>
     <body>
-        <header>
-            <nav>
-                <a class="accueil" href="{{ path('home_index') }}">Accueil</a>
-            </nav>
-        </header>
-        <section>
-            <div>
-                {% block body %}{% endblock %}
-            </div>
-        </section>
-        
-        <footer class="centrer">
-                <div class="table">
-                    <p></p>
-                    <p>
-                        DL6 - @2020 - Elan Formation
-                    </p>
-                    <p class="absolute">
-                        Réalisé par Aliou et Sylvain
-                    </p>
-            
+        <div class="main">
+            <header>
+                <nav>
+                    <a class="accueil" href="{{ path('home_index') }}">Accueil</a>
+                </nav>
+            </header>
+            <section>
+                <div>
+                    {% block body %}{% endblock %}
                 </div>
+            </section>
             
-        </footer>
+            <footer class="centrer">
+                    
+                        <p>
+                            DL6 - @2020 - Elan Formation
+                        </p>
+                        <p class="absolute">
+                            Réalisé par Aliou et Sylvain
+                        </p>
+            </footer>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 
